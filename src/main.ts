@@ -63,15 +63,15 @@ async function play(
       text = "Check!";
     }
 
-    if (status.isCheckMate) {
+    if (game.isCheckMate) {
       text = "Checkmate!";
     }
 
-    if (status.isRepetition) {
+    if (game.isRepetition) {
       text = "Game over - repetition :(";
     }
 
-    if (status.isStalemate) {
+    if (game.isStalemate) {
       text = "Game over - stalemate :(";
     }
 
