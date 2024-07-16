@@ -77,6 +77,7 @@ async function play(
 
     await agent.post({
       text,
+      langs: ["en"],
       reply,
       embed: {
         $type: "app.bsky.embed.images",
