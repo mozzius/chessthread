@@ -1,8 +1,4 @@
-import {
-  AppBskyEmbedImages,
-  AppBskyFeedDefs,
-  AppBskyFeedPost,
-} from "@atproto/api";
+import { AppBskyEmbedImages, AppBskyFeedPost } from "@atproto/api";
 import {
   ComAtprotoSyncSubscribeRepos,
   SubscribeReposMessage,
@@ -15,7 +11,7 @@ import { Transformer } from "@napi-rs/image";
 
 const DID = "did:plc:xxlgzpjfmxcmn3ekkn32vebd";
 const THREAD =
-  "at://did:plc:xxlgzpjfmxcmn3ekkn32vebd/app.bsky.feed.post/3kxexi6kky22c";
+  "at://did:plc:xxlgzpjfmxcmn3ekkn32vebd/app.bsky.feed.post/3kxf2st53h22c";
 
 async function play(
   text: string,
@@ -31,7 +27,7 @@ async function play(
     if (parent !== THREAD) {
       const { data } = await agent.getPosts({ uris: [parent] });
       const post = data.posts[0];
-      if (AppBskyFeedDefs.isPostView(post)) {
+      if (post) {
         if (AppBskyEmbedImages.isView(post.embed)) {
           const image = post.embed.images.at(0)!;
           previousMoves = image.alt.split("\n");
@@ -67,7 +63,10 @@ async function play(
         images: [
           {
             image: blob.data.blob,
-            alt: previousMoves.join("\n") + "\n" + move,
+            alt:
+              previousMoves.length === 0
+                ? move
+                : previousMoves.join("\n") + "\n" + move,
             aspectRatio: {
               height: 1024,
               width: 1024,
