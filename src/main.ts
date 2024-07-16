@@ -14,12 +14,12 @@ const THREAD =
   "at://did:plc:xxlgzpjfmxcmn3ekkn32vebd/app.bsky.feed.post/3kxf2st53h22c";
 
 async function play(
-  text: string,
+  input: string,
   reply: AppBskyFeedPost.ReplyRef,
   parent: string
 ) {
   try {
-    const move = text.split(" ").at(0);
+    const move = input.split(" ").at(0);
     if (!move) return;
     console.log("Playing move", move);
     const agent = await getAgent();
@@ -46,7 +46,9 @@ async function play(
 
     game.move(move);
 
-    const image = await getImageForBoard(game.getStatus().board);
+    const status = game.getStatus();
+
+    const image = await getImageForBoard(status.board);
 
     const blob = await agent.uploadBlob(
       await Transformer.fromSvg(image).png(),
@@ -55,8 +57,26 @@ async function play(
       }
     );
 
+    let text = "";
+
+    if (status.isCheck) {
+      text = "Check!";
+    }
+
+    if (status.isCheckMate) {
+      text = "Checkmate!";
+    }
+
+    if (status.isRepetition) {
+      text = "Game over - repetition :(";
+    }
+
+    if (status.isStalemate) {
+      text = "Game over - stalemate :(";
+    }
+
     await agent.post({
-      text: "",
+      text,
       reply,
       embed: {
         $type: "app.bsky.embed.images",
