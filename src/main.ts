@@ -19,7 +19,7 @@ async function play(
   parent: string
 ) {
   try {
-    const move = input.split(" ").at(0);
+    const move = input.replaceAll("\n", " ").split(" ").at(0);
     if (!move) return;
     console.log("Playing move", move);
     const agent = await getAgent();
