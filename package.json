@@ -1,0 +1,33 @@
+{
+  "name": "chessthread",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "dev": "tsx --watch src/main.ts",
+    "test": "tsx --watch scripts/generate-board.ts"
+  },
+  "keywords": [],
+  "author": "Samuel Newman <mozzius@protonmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@atproto/api": "^0.12.21",
+    "@napi-rs/image": "^1.9.2",
+    "atproto-firehose": "^0.2.2",
+    "chess": "^1.2.2",
+    "dotenv": "^16.4.5",
+    "react": "^18.3.1",
+    "satori": "^0.10.14",
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@inquirer/prompts": "^5.1.2",
+    "@types/node": "^20.14.8",
+    "@types/react": "^18.3.3"
+  },
+  "packageManager": "pnpm@9.3.0+sha512.ee7b93e0c2bd11409c6424f92b866f31d3ea1bef5fbe47d3c7500cdc3c9668833d2e55681ad66df5b640c61fa9dc25d546efa54d76d7f8bf54b13614ac293631"
+}
